@@ -234,3 +234,25 @@ http://ionicframework.com/docs/theming/ */
     --ion-card-background: #1e1e1e;
   }
 }
+.titulo{
+  text-align: center;
+  padding: 20px;
+}
+
+.table ion-row:first-child{
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.table ion-row{
+  padding: 10px;
+  font-size: 16px;
+}
+
+.table ion-row:nth-child(even){
+  background-color: #f2f2f2;
+}
+
+.table ion-row:nth-child(ODD){
+  background-color: #fff;
+}
