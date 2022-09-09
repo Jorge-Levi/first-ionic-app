@@ -13,8 +13,8 @@ import {
 import { useHistory, useParams } from "react-router";
 import React, { useEffect, useState } from "react";
 import { IonGrid, IonRow, IonCol, IonContent } from "@ionic/react";
-import { add, pencil, trash } from "ionicons/icons";
-import { removeCustomer, searchCustomer } from "./customerApi";
+import { add, pencil, remove, trash } from "ionicons/icons";
+import { removeCustomer, saveCustomer, searchCustomer } from "./customerApi";
 import Customer from "./Customer";
 
 const CustomerList: React.FC = () => {
@@ -36,6 +36,18 @@ const CustomerList: React.FC = () => {
     search();
   };
 
+  const pruebaLocalStorage = () => {
+    const ejemplo = {
+        id:"1",
+        firstName:"Jorge Levi",
+        lastName:"Tapia Lugardo",
+        email:"tapialugardo29@gmail.com",
+        phone:"7442310743",
+        address:"Acapulco"
+    }
+
+    saveCustomer(ejemplo);
+  }
 
   const addCustomer = () => {
     history.push("/page/customer/new");
@@ -104,6 +116,9 @@ const CustomerList: React.FC = () => {
               ))}
             </IonGrid>
           </IonCard>
+          <IonButton onClick={pruebaLocalStorage} color="primary" fill="clear">
+            <IonIcon icon={pencil}></IonIcon>Prube Local Storage
+          </IonButton>
         </IonContent>
       </IonContent>
     </IonPage>

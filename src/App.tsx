@@ -28,6 +28,7 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 import CustomerList from "./pages/customers/customerList";
+import CustomerEdit from "./pages/customers/customerEdit";
 
 setupIonicReact();
 
@@ -41,9 +42,12 @@ const App: React.FC = () => {
             <Route path="/" exact={true}>
               <Redirect to="/page/customers" />
             </Route>
-              <Route path="/page/customers" exact={true}>
-                <CustomerList></CustomerList>
-              </Route>
+            <Route path="/page/customers" exact={true}>
+              <CustomerList></CustomerList>
+            </Route>
+            <Route path="/page/customer/:id" exact={true}>
+              <CustomerEdit></CustomerEdit>
+            </Route>
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>
