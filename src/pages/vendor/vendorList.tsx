@@ -14,12 +14,12 @@ import { useHistory, useParams } from "react-router";
 import React, { useEffect, useState } from "react";
 import { IonGrid, IonRow, IonCol, IonContent } from "@ionic/react";
 import { add, pencil, remove, trash } from "ionicons/icons";
-import { removeCustomer, saveCustomer, searchCustomer } from "./customerApi";
-import Customer from "./Customer";
+import { removeVendor, saveVendor, searchVendor } from "./vendorApi";
+import Vendor from "./vendor";
 
-const CustomerList: React.FC = () => {
+const VendorList: React.FC = () => {
   const { name } = useParams<{ name: string }>();
-  const [clientes, setClientes] = useState<Customer[]>([]);
+  const [vendors, setVendors] = useState<Vendor[]>([]);
   const history = useHistory();
 
   useEffect(() => {
@@ -27,12 +27,12 @@ const CustomerList: React.FC = () => {
   }, [history.location.pathname]);
 
   const search = () => {
-    let result = searchCustomer();
-    setClientes(result);
+    let result = searchVendor();
+    setVendors(result);
   };
 
   const eliminar = (id:any) =>{
-    removeCustomer(id);
+    removeVendor(id);
     search();
   };
 
@@ -46,15 +46,15 @@ const CustomerList: React.FC = () => {
         address:"Acapulco"
     }
 
-    saveCustomer(ejemplo);
+    saveVendor(ejemplo);
   }
 
-  const addCustomer = () => {
-    history.push("/page/customer/new");
+  const addVendor = () => {
+    history.push("/page/vendor/new");
   }
 
-  const editCustomer = (id:string) => {
-    history.push("/page/customer/:id");
+  const editVendor = (id:string) => {
+    history.push("/page/vendors/:id");
   }
 
   return (
@@ -76,18 +76,18 @@ const CustomerList: React.FC = () => {
         </IonHeader>
         <IonContent>
           <IonCard>
-            <IonTitle className="titulo">Gesiton de Clientes</IonTitle>
+            <IonTitle className="titulo">Gesiton de Proovedores</IonTitle>
             <IonItem>
               <IonButton
                 color="primary"
                 fill="solid"
                 slot="end"
                 size="default"
-                className="btnAddCliente"
-                onClick={addCustomer}
+                className="btnAddEmpleado"
+                onClick={addVendor}
               >
                 <IonIcon icon={add}></IonIcon>
-                Agregar Cliente
+                Agregar Proveedor
               </IonButton>
             </IonItem>
             <IonGrid className="table">
@@ -98,17 +98,17 @@ const CustomerList: React.FC = () => {
                 <IonCol>Direccion</IonCol>
                 <IonCol>Acciones</IonCol>
               </IonRow>
-              {clientes.map((cliente: Customer) => (
+              {vendors.map((vendor: Vendor) => (
                 <IonRow>
-                  <IonCol>{cliente.firstName + " " + cliente.lastName}</IonCol>
-                  <IonCol>{cliente.email}</IonCol>
-                  <IonCol>{cliente.phone}</IonCol>
-                  <IonCol>{cliente.address}</IonCol>
+                  <IonCol>{vendor.firstName + " " + vendor.lastName}</IonCol>
+                  <IonCol>{vendor.email}</IonCol>
+                  <IonCol>{vendor.phone}</IonCol>
+                  <IonCol>{vendor.address}</IonCol>
                   <IonCol>
-                    <IonButton color="primary" fill="clear" onClick={() => editCustomer(String(cliente.id))}>
+                    <IonButton color="primary" fill="clear" onClick={() => editVendor(String(vendor.id))}>
                       <IonIcon icon={pencil} slot="icon-only"></IonIcon>
                     </IonButton>
-                    <IonButton color="danger" fill="clear" onClick={() => eliminar(String(cliente.id))}>
+                    <IonButton color="danger" fill="clear" onClick={() => eliminar(String(vendor.id))}>
                       <IonIcon icon={trash} slot="icon-only"></IonIcon>
                     </IonButton>
                   </IonCol>
@@ -116,13 +116,10 @@ const CustomerList: React.FC = () => {
               ))}
             </IonGrid>
           </IonCard>
-          <IonButton onClick={pruebaLocalStorage} color="primary" fill="clear">
-            <IonIcon icon={pencil}></IonIcon>Prube Local Storage
-          </IonButton>
         </IonContent>
       </IonContent>
     </IonPage>
   );
 };
 
-export default CustomerList;
+export default VendorList;

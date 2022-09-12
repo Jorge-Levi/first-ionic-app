@@ -15,13 +15,13 @@ import {
 import { useHistory, useParams } from "react-router";
 import React, { useEffect, useState } from "react";
 import { IonGrid, IonRow, IonCol, IonContent } from "@ionic/react";
-import { checkmark } from "ionicons/icons";
-import { saveCustomer, searchCustomerById } from "./customerApi";
-import Customer from "./Customer";
+import { add, checkmark, pencil, remove, trash } from "ionicons/icons";
+import { removeVendor, saveVendor, searchVendor, searchVendorById } from "./vendorApi";
+import Vendor from "./vendor";
 
-const CustomerEdit: React.FC = () => {
+const VendorEdit: React.FC = () => {
   const { name, id } = useParams<{ name: string; id: string }>();
-  const [customer, setCustomer] = useState<Customer>({});
+  const [vendor, setVendor] = useState<Vendor>({});
   const history = useHistory();
 
   useEffect(() => {
@@ -30,14 +30,14 @@ const CustomerEdit: React.FC = () => {
 
   const search = () => {
     if(id !== "new"){
-      let result = searchCustomerById(id);
-      setCustomer(result);
+      let result = searchVendorById(id);
+      setVendor(result);
     }
   };
 
   const save = () =>{
-    saveCustomer(customer);
-    history.push("/page/customers" );
+    saveVendor(vendor);
+    history.push("/page/vendors" );
   }
 
   return (
@@ -59,19 +59,19 @@ const CustomerEdit: React.FC = () => {
         </IonHeader>
         <IonContent>
           <IonCard>
-            <IonTitle className="titulo">{(id === "new") ? "Agregar nuevo " : "Editar "} Cliente</IonTitle>
+            <IonTitle className="titulo">{(id === "new") ? "Agregar nuevo " : "Editar "} Proveedor</IonTitle>
             <IonGrid>
               <IonRow>
                 <IonCol size-lg="6" size-xs="12">
                   <IonItem>
                     <IonLabel position="floating">Nombre</IonLabel>
-                    <IonInput onIonChange={e=> customer.firstName = String(e.detail.value)} value = {customer.firstName} />
+                    <IonInput onIonChange={e=> vendor.firstName = String(e.detail.value)} value = {vendor.firstName} />
                   </IonItem>
                 </IonCol>
                 <IonCol size-lg="6" size-xs="12">
                   <IonItem>
                     <IonLabel position="floating">Apellido</IonLabel>
-                    <IonInput onIonChange={e=> customer.lastName = String(e.detail.value)} value = {customer.lastName}/>
+                    <IonInput onIonChange={e=> vendor.lastName = String(e.detail.value)} value = {vendor.lastName}/>
                   </IonItem>
                 </IonCol>
               </IonRow>
@@ -79,13 +79,13 @@ const CustomerEdit: React.FC = () => {
                 <IonCol size-lg="6" size-xs="12">
                   <IonItem>
                     <IonLabel position="floating">Email</IonLabel>
-                    <IonInput onIonChange={e=> customer.email = String(e.detail.value)} value = {customer.email} type="email" />
+                    <IonInput onIonChange={e=> vendor.email = String(e.detail.value)} value = {vendor.email} type="email" />
                   </IonItem>
                 </IonCol>
                 <IonCol size-lg="6" size-xs="12">
                   <IonItem>
                     <IonLabel position="floating">Direccion</IonLabel>
-                    <IonInput onIonChange={e=> customer.address = String(e.detail.value)} value = {customer.address} />
+                    <IonInput onIonChange={e=> vendor.address = String(e.detail.value)} value = {vendor.address} />
                   </IonItem>
                 </IonCol>
               </IonRow>
@@ -93,7 +93,7 @@ const CustomerEdit: React.FC = () => {
                 <IonCol size-lg="12" size-xs="12">
                   <IonItem>
                     <IonLabel position="floating">Telefono</IonLabel>
-                    <IonInput onIonChange={e=> customer.phone = String(e.detail.value)} value = {customer.phone} type="tel" />
+                    <IonInput onIonChange={e=> vendor.phone = String(e.detail.value)} value = {vendor.phone} type="tel" />
                   </IonItem>
                 </IonCol>
               </IonRow>
@@ -118,4 +118,4 @@ const CustomerEdit: React.FC = () => {
   );
 };
 
-export default CustomerEdit;
+export default VendorEdit;

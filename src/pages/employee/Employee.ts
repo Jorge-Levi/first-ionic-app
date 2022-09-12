@@ -1,4 +1,4 @@
-export default interface Customer {
+export default interface Employee {
     id?: string,
     firstName?: string,
     lastName?: string,
